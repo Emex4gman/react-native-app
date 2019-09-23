@@ -12,3 +12,4 @@ web-report/
 package-lock.json
 android/
 .gitignore
+android
