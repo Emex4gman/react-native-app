@@ -8,7 +8,7 @@ const usersMap = props => {
     let userLocationMarker = null;
 
     if (props.userLocation){
-        userLocationMarker = <MapView.Marker pinColor={'orange'}  coordinate={props.userLocation}/>
+        userLocationMarker = <MapView.Marker pinColor={'green'}  coordinate={props.userLocation}/>
     }
 
     const usersMarkers = props.usersPlaces.map(userPlace => 
