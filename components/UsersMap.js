@@ -7,28 +7,28 @@ import MapView from 'react-native-maps';
 const usersMap = props => {
     let userLocationMarker = null;
 
-    if (props.userLocation){
-        userLocationMarker = <MapView.Marker style={styles.markerSize} pinColor={'green'}  coordinate={props.userLocation}/>
+    if (props.userLocation) {
+        userLocationMarker = <MapView.Marker style={styles.markerSize} pinColor={'green'} coordinate={props.userLocation} />
     }
 
-    const usersMarkers = props.usersPlaces.map(userPlace => 
-    (<MapView.Marker style={styles.markerSize} pinColor={'orange'} image={markerIcon} coordinate={userPlace} key={userPlace.id}/> ));
+    const usersMarkers = props.usersPlaces.map(userPlace =>
+        (<MapView.Marker style={styles.markerSize} pinColor={'orange'} image={markerIcon} coordinate={userPlace} key={userPlace.id} />));
     return (
-<View style={styles.mapConatiner}>
-<MapView
-initialRegion={{
-    latitude: 37.78825, 
-    longitude: -122.4324,
-    latitudeDelta: 0.0622,
-    longitudeDelta: 0.0421,
-  }}
-  region={props.userLocation}
-  style={styles.map}>       
-  {userLocationMarker}
-  {usersMarkers}
-    </MapView>
-</View>
-    ); 
+        <View style={styles.mapConatiner}>
+            <MapView
+                initialRegion={{
+                    latitude: 37.78825,
+                    longitude: -122.4324,
+                    latitudeDelta: 0.0622,
+                    longitudeDelta: 0.0421,
+                }}
+                region={props.userLocation}
+                style={styles.map}>
+                {userLocationMarker}
+                {usersMarkers}
+            </MapView>
+        </View>
+    );
 }
 
 const styles = StyleSheet.create({
@@ -38,13 +38,13 @@ const styles = StyleSheet.create({
         marginTop: 30
 
     },
-    markerSize:{
-        width:20,
+    markerSize: {
+        width: 20,
     },
-    map:{
+    map: {
         width: '100%',
         height: '100%'
     }
-}) 
+})
 
 export default usersMap;

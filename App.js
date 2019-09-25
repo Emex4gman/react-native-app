@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AppRegistry, StyleSheet, Text, View, Button, Image ,ImageBackground ,TouchableOpacity} from 'react-native';
+import { AppRegistry, StyleSheet, Text, View, Button, Image, ImageBackground, TouchableOpacity } from 'react-native';
 import axios from 'axios'
 // importing our FetchLocation file form the components folder
 import FetchLocation from './components/FetchLocation';
@@ -16,11 +16,11 @@ import Imagee from './assets/hospital-x-ray.png'
 
 export default class App extends Component {
   state = {
-    userLocation: null, 
+    userLocation: null,
     usersPlaces: [],
-    healthLocation: null 
+    healthLocation: null
   }
-   
+
 
   option = {
     "headers": {
@@ -39,7 +39,7 @@ export default class App extends Component {
   //   });
   // }
 
-  
+
   getUserLocationHandlerV1 = async () => {
     let {
       status
@@ -54,7 +54,7 @@ export default class App extends Component {
 
       console.log("working on location");
 
-      let location = await Location.getCurrentPositionAsync({enableHighAccuracy: true});
+      let location = await Location.getCurrentPositionAsync({ enableHighAccuracy: true });
 
       console.log('latitude is ' + location.coords.latitude)
       console.log('longitude is ' + location.coords.longitude)
@@ -72,17 +72,17 @@ export default class App extends Component {
 
 
   getUserLocationHandler = () => {
-    
+
     navigator.geolocation.getCurrentPosition(position => {
       console.log(position.coords.latitude + " hekko " + position.coords.longitude);
       this.setState({
-      userLocation: {
-        latitude: position.coords.latitude,
-        longitude: position.coords.longitude,
-        latitudeDelta: 0.0622,
-        longitudeDelta: 0.0421,
-      }
-    });
+        userLocation: {
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+          latitudeDelta: 0.0622,
+          longitudeDelta: 0.0421,
+        }
+      });
     }, err => console.log(err));
   }
 
@@ -90,100 +90,99 @@ export default class App extends Component {
 
     navigator.geolocation.getCurrentPosition(position => {
       console.log(position.coords.latitude + " hekko " + position.coords.longitude);
-this.setState({
-      userLocation: {
-        latitude: position.coords.latitude,
-        longitude: position.coords.longitude,
-        latitudeDelta: 0.0622,
-        longitudeDelta: 0.0421,
-      }
-    });
-
-    var latitude = position.coords.latitude;
-    var longitude = position.coords.longitude;
-    //console.log(position.coords.latitude);
-    axios.get('https://api.reportahealth.org/v1/fetch_nearest_facilities?latitude=' + latitude +'&longitude='+longitude+'&fac_type=1&page=2', this.option)
-      .then(res => {
-        var dataArr = res.data.data.data;
-        const placesArray = [];
-        for (var key = 0; key < dataArr.length; key++) {
-          placesArray.push({
-            latitude: Number(dataArr[key].latitude),
-            longitude: Number(dataArr[key].longitude),
-            id: key,
-          });
+      this.setState({
+        userLocation: {
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+          latitudeDelta: 0.0622,
+          longitudeDelta: 0.0421,
         }
-        //console.log(placesArray);
-        this.setState({
-          usersPlaces: placesArray
-        });
+      });
 
-      })
+      var latitude = position.coords.latitude;
+      var longitude = position.coords.longitude;
+      //console.log(position.coords.latitude);
+      axios.get('https://api.reportahealth.org/v1/fetch_nearest_facilities?latitude=' + latitude + '&longitude=' + longitude + '&fac_type=1&page=2', this.option)
+        .then(res => {
+          var dataArr = res.data.data.data;
+          const placesArray = [];
+          for (var key = 0; key < dataArr.length; key++) {
+            placesArray.push({
+              latitude: Number(dataArr[key].latitude),
+              longitude: Number(dataArr[key].longitude),
+              id: key,
+            });
+          }
+          //console.log(placesArray);
+          this.setState({
+            usersPlaces: placesArray
+          });
 
-      .catch(err => console.log(err));
+        })
+
+        .catch(err => console.log(err));
 
     }, err => console.log(err));
 
- 
+
   }
 
   render() {
-    return ( 
-    <View>
+    return (
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
 
-      <FrontPage/>
-    </View>
-        
-      );
-    } 
-      
+        <FrontPage />
+      </View>
+
+    );
   }
 
+}
+
 const styles = StyleSheet.create({
-      button: {
-        position: 'absolute',
-      }, 
-      getCenters: {
-        position: 'absolute',
-        top: 600,
+  button: {
+    position: 'absolute',
+  },
+  getCenters: {
+    position: 'absolute',
+    top: 600,
 
-      },
-      forntxover: {
-        position: 'absolute',
-        zIndex: 10,
-        width: '100%',
+  },
+  forntxover: {
+    position: 'absolute',
+    zIndex: 10,
+    width: '100%',
 
 
-      },
-      getLocatio: {
-        position: 'absolute',
-        top: 150,
-      },
-      container:
+  },
+  getLocatio: {
+    position: 'absolute',
+    top: 150,
+  },
+  container:
 
-      {
-        flex: 1,
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        justifyContent: 'center',
-        alignItems: 'center',
-        alignContent: 'center',
-        // backgroundColor: 'blue',
-      },
-      getButton: {
-        margin: 20,
-      },
-      baby: {
-        // backgroundColor: 'black',
-        borderWidth: 5,
-        borderColor: 'white',
-        borderRadius: 15,
-        margin: 8,
-        height: 200,
-        width: 180,
-        justifyContent: 'center',
-        alignItems: 'center'
-      }
+  {
+    flex: 1,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignContent: 'center',
+    // backgroundColor: 'blue',
+  },
+  getButton: {
+    margin: 20,
+  },
+  baby: {
+    // backgroundColor: 'black',
+    borderWidth: 5,
+    borderColor: 'white',
+    borderRadius: 15,
+    margin: 8,
+    height: 200,
+    width: 180,
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
 });
 
-AppRegistry.registerComponent('App', () => App);
