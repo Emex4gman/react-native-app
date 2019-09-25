@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
-import { AppRegistry, StyleSheet, Text, View, Button } from 'react-native';
+import { AppRegistry, StyleSheet, Text, View, Button, Image ,ImageBackground ,TouchableOpacity} from 'react-native';
 import axios from 'axios'
 // importing our FetchLocation file form the components folder
 import FetchLocation from './components/FetchLocation';
 import UsersMap from './components/UsersMap';
-import FrontPageIcons from './components/FrontPageIcons'
+import FrontPage from './components/FrontPage'
 import { Constants, MapView } from 'expo';
 import * as Permissions from 'expo-permissions'
 import * as Location from 'expo-location'
+import { checkForUpdateAsync } from 'expo/build/Updates/Updates';
+import hospital from './assets/hospital-x-ray.png'
+import pill from './assets/pill.png'
+import group from './assets/Group141.png'
+import Imagee from './assets/hospital-x-ray.png'
 
 export default class App extends Component {
   state = {
@@ -123,58 +128,62 @@ this.setState({
   }
 
   render() {
-    return ( <View style = {styles.container} >
-      
-      <View style = { styles.getLocatio}>
-       <FetchLocation  onGetLocation = {this.getUserLocationHandler}/> 
-       </View>
-       <View style = { styles.forntxover}>
-       <FrontPageIcons/>
-       </View>
-       
-       
-       <UsersMap userLocation = {this.state.userLocation}
-      usersPlaces = {this.state.usersPlaces}/> 
+    return ( 
+    <View>
 
- 
-       <View style = { styles.getCenters}>
-      <Button  title = "get health centers close to you" onPress = {this.getuserPlacesHandler}/>
-       </View>
-      </View> 
-    );
+      <FrontPage/>
+    </View>
+        
+      );
+    } 
+      
   }
-}
 
 const styles = StyleSheet.create({
-  button:{
-    position: 'absolute',
-  },
-  getCenters:{
-    position: 'absolute',
-    top: 600,
-   
-  },
-  forntxover:{
-    position: 'absolute',
-    zIndex: 10,
-    width: '100%',
-    
-   
-  },
-  getLocatio:{
-    position: 'absolute',
-    top:150,
-  },
-  container: {
-    position: 'relative',
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  getButton: {
-    margin: 20,
-  }
+      button: {
+        position: 'absolute',
+      }, 
+      getCenters: {
+        position: 'absolute',
+        top: 600,
+
+      },
+      forntxover: {
+        position: 'absolute',
+        zIndex: 10,
+        width: '100%',
+
+
+      },
+      getLocatio: {
+        position: 'absolute',
+        top: 150,
+      },
+      container:
+
+      {
+        flex: 1,
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        justifyContent: 'center',
+        alignItems: 'center',
+        alignContent: 'center',
+        // backgroundColor: 'blue',
+      },
+      getButton: {
+        margin: 20,
+      },
+      baby: {
+        // backgroundColor: 'black',
+        borderWidth: 5,
+        borderColor: 'white',
+        borderRadius: 15,
+        margin: 8,
+        height: 200,
+        width: 180,
+        justifyContent: 'center',
+        alignItems: 'center'
+      }
 });
 
 AppRegistry.registerComponent('App', () => App);
