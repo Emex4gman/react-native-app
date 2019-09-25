@@ -6,5 +6,5 @@ const fetchLocation = props=>{
         <Button title="Get Location" onPress={props.onGetLocation} />
     );
 };
-
+ 
 export default fetchLocation;

@@ -4,16 +4,16 @@ import axios from 'axios'
 // importing our FetchLocation file form the components folder
 import FetchLocation from './components/FetchLocation';
 import UsersMap from './components/UsersMap';
-
+import FrontPageIcons from './components/FrontPageIcons'
 import { Constants, MapView } from 'expo';
 import * as Permissions from 'expo-permissions'
 import * as Location from 'expo-location'
 
 export default class App extends Component {
   state = {
-    userLocation: null,
+    userLocation: null, 
     usersPlaces: [],
-    healthLocation: null
+    healthLocation: null 
   }
    
 
@@ -125,19 +125,48 @@ this.setState({
   render() {
     return ( <View style = {styles.container} >
       
-       <FetchLocation onGetLocation = {this.getUserLocationHandler}/> 
-      <UsersMap userLocation = {this.state.userLocation}
-      usersPlaces = {this.state.usersPlaces}/> 
-       <View style = {styles.getButton}>
-      <Button title = "get health centers close to you" onPress = {this.getuserPlacesHandler}/>
+      <View style = { styles.getLocatio}>
+       <FetchLocation  onGetLocation = {this.getUserLocationHandler}/> 
        </View>
-      </View>
+       <View style = { styles.forntxover}>
+       <FrontPageIcons/>
+       </View>
+       
+       
+       <UsersMap userLocation = {this.state.userLocation}
+      usersPlaces = {this.state.usersPlaces}/> 
+
+ 
+       <View style = { styles.getCenters}>
+      <Button  title = "get health centers close to you" onPress = {this.getuserPlacesHandler}/>
+       </View>
+      </View> 
     );
   }
 }
 
 const styles = StyleSheet.create({
+  button:{
+    position: 'absolute',
+  },
+  getCenters:{
+    position: 'absolute',
+    top: 600,
+   
+  },
+  forntxover:{
+    position: 'absolute',
+    zIndex: 10,
+    width: '100%',
+    
+   
+  },
+  getLocatio:{
+    position: 'absolute',
+    top:150,
+  },
   container: {
+    position: 'relative',
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',

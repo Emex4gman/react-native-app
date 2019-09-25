@@ -8,11 +8,11 @@ const usersMap = props => {
     let userLocationMarker = null;
 
     if (props.userLocation){
-        userLocationMarker = <MapView.Marker pinColor={'green'}  coordinate={props.userLocation}/>
+        userLocationMarker = <MapView.Marker style={styles.markerSize} pinColor={'green'}  coordinate={props.userLocation}/>
     }
 
     const usersMarkers = props.usersPlaces.map(userPlace => 
-    (<MapView.Marker pinColor={'orange'} image={markerIcon} coordinate={userPlace} key={userPlace.id}/> ));
+    (<MapView.Marker style={styles.markerSize} pinColor={'orange'} image={markerIcon} coordinate={userPlace} key={userPlace.id}/> ));
     return (
 <View style={styles.mapConatiner}>
 <MapView
@@ -34,9 +34,12 @@ initialRegion={{
 const styles = StyleSheet.create({
     mapConatiner: {
         width: '100%',
-        height: 400,
+        height: '100%',
         marginTop: 30
 
+    },
+    markerSize:{
+        width:20,
     },
     map:{
         width: '100%',
